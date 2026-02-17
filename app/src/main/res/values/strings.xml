@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TheGreatestCocktailApp</string>
+    <string name="title_activity_drinks">DrinksActivity</string>
+    <string name="title_activity_detail_cocktail">DetailCocktailActivity</string>
+    <string name="tab_item_random">A la une</string>
+    <string name="tab_item_category">Categories</string>
+    <string name="tab_item_favorite">Favorites</string>
+
 </resources>
