@@ -22,11 +22,11 @@ interface ApiService {
 
     @GET("filter.php")
     fun getDrinksPreview(
-        @Query("c") category: String
+        @Query("c") categoryID: String
     ): Call<DrinkFilterResponse>
 
     @GET("lookup.php")
     fun getDetailCocktail(
-        @Query("i") id: String
+        @Query("i") drinkID: String
     ): Call<CocktailResponse>
 }

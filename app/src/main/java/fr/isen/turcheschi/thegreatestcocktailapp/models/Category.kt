@@ -63,8 +63,8 @@ enum class Category {
                 )
 
                 NON_ALCOHOLIC -> listOf(
-                    colorResource(R.color.orange_200),
-                    colorResource(R.color.orange_700)
+                    colorResource(R.color.yellow_200),
+                    colorResource(R.color.yellow_700)
                 )
 
                 OTHER -> listOf(

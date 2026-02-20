@@ -2,6 +2,7 @@ package fr.isen.turcheschi.thegreatestcocktailapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,14 +21,20 @@ class DrinksActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        Log.d("LifeCycle", "DrinksActivity onCreate")
+        val categoryID = intent.getStringExtra(CATEGORY) ?: ""
         setContent {
             val context = LocalContext.current
             TheGreatestCocktailAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DrinksScreen(Modifier.padding(innerPadding))
+                    DrinksScreen(Modifier.padding(innerPadding), categoryID)
                 }
             }
         }
+    }
+
+    companion object {
+        const val CATEGORY = "category"
     }
 }
 
