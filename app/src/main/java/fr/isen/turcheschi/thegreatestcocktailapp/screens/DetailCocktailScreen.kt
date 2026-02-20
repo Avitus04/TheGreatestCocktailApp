@@ -197,36 +197,6 @@ fun DetailCocktailScreen(
                 }
             }
         }
-
-        if (cocktail == null) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
-        } else {
-
-            Column(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 40.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-                Text(
-                    text = cocktail?.strDrink ?: "",
-                    color = Color.White,
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = cocktail?.strInstructions ?: "",
-                    color = Color.White,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-            }
-        }
     }
 }
 @Composable

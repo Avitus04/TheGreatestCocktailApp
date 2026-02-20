@@ -1,5 +1,6 @@
 package fr.isen.turcheschi.thegreatestcocktailapp.network
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import fr.isen.turcheschi.thegreatestcocktailapp.dataClasses.Drink
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,7 @@ class CocktailViewModel : ViewModel() {
         NetworkManager.getRandomCocktail(
 
             onSuccess = { response ->
+                Log.d("API_DEBUG", "Full response: $response")
                 _cocktail.value = response.drinks?.firstOrNull()
             },
 
