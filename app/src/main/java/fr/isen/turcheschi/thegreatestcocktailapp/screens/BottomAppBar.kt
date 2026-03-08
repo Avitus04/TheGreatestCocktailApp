@@ -1,7 +1,5 @@
 package fr.isen.turcheschi.thegreatestcocktailapp.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -12,13 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
-import androidx.navigation.internal.NavContext
 import fr.isen.turcheschi.thegreatestcocktailapp.R
 import fr.isen.turcheschi.thegreatestcocktailapp.TabBarItem
 
@@ -29,23 +23,30 @@ fun BottomAppBar(items:List<TabBarItem>, navController: NavController)
         mutableStateOf(0)
     }
 
-    NavigationBar {
+    NavigationBar (containerColor = colorResource(R.color.sunset_orange)) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
-                selectedTabIndex == index,
-                {
+                selected = selectedTabIndex == index,
+                onClick = {
                     selectedTabIndex = index
                     navController.navigate(item.title)
                 },
-            {
-                TabBarIcon(
-                    selectedTabIndex == index,
-                    item.selectedIcon,
-                    item.unselectedIcon,
-                    item.title
+                icon = {
+                    TabBarIcon(
+                        selectedTabIndex == index,
+                        item.selectedIcon,
+                        item.unselectedIcon,
+                        item.title
+                    )
+                },
+                label = { Text(item.title) },
+
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = colorResource(R.color.ocean_blue),
+                    selectedTextColor = colorResource(R.color.text_dark),
+                    unselectedIconColor = colorResource(R.color.ocean_blue),
+                    unselectedTextColor = colorResource(R.color.text_dark)
                 )
-            },
-            label = {Text(item.title)}
             )
         }
     }

@@ -1,9 +1,6 @@
 package fr.isen.turcheschi.thegreatestcocktailapp.screens
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -24,7 +22,6 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -36,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -43,7 +41,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import fr.isen.turcheschi.thegreatestcocktailapp.DetailCocktailActivity
 import fr.isen.turcheschi.thegreatestcocktailapp.R
 import fr.isen.turcheschi.thegreatestcocktailapp.dataClasses.CocktailResponse
 import fr.isen.turcheschi.thegreatestcocktailapp.dataClasses.Drink
@@ -140,14 +137,8 @@ fun DetailCocktailScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         Box(
-            Modifier.background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        colorResource(R.color.purple_500),
-                        colorResource((R.color.purple_700))
-                    )
-                )
-            ).fillMaxSize()
+            Modifier.background(colorResource(R.color.sand_background))
+                .fillMaxSize()
         )
         {
             Column(
@@ -162,6 +153,7 @@ fun DetailCocktailScreen(
                         .padding(20.dp)
                         .width(200.dp)
                         .height(200.dp)
+                        .shadow(18.dp, CircleShape)
                         .clip(CircleShape)
                         .border(
                             width = 1.dp,
@@ -169,26 +161,13 @@ fun DetailCocktailScreen(
                             CircleShape
                         )
                 )
-//                Image(
-//                    painter = painterResource(id = R.drawable.cocktail_intro),
-//                    contentDescription = "An image of a yoghurt cocktail",
-//                    contentScale = ContentScale.FillBounds,
-//                    modifier = Modifier
-//                        .width(200.dp)
-//                        .height(200.dp)
-//                        .clip(CircleShape)
-//                        .border(
-//                            2.dp, color = colorResource(R.color.teal_200),
-//                            CircleShape
-//                        )
-//                )
 
                 Text(
                     text = drink.strDrink.toString(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = colorResource(
-                        R.color.white
+                        R.color.text_dark
                     ),
                     modifier = Modifier.padding(vertical = 25.dp)
                 )
@@ -213,58 +192,75 @@ fun DetailCocktailScreen(
                 Row() {
                     Text(
                         text = drink.strGlass.toString(),
-                        color = colorResource(R.color.grey_300),
+                        color = colorResource(R.color.ocean_blue),
                         modifier = Modifier.padding(vertical = 20.dp)
                     )
                 }
 
-                Card(Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                Card(Modifier.padding(horizontal = 16.dp, vertical = 8.dp).shadow(8.dp, RoundedCornerShape(16.dp))) {
                     Column(
                         Modifier
-                            .background(colorResource(R.color.card_opacity),)
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(
+                                        colorResource(R.color.card_tropical),
+                                        colorResource(R.color.sunset_orange)
+                                    )
+                                )
+                            )
                             .padding(16.dp)
                             .fillMaxWidth()
+                    , verticalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         Text(
-                            text = "Ingredients",
+                            text = "Ingredients:",
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
                             color = colorResource(
-                                R.color.white
-                            )
+                                R.color.section_title
+                            ),
+                            modifier = Modifier.padding(bottom = 8.dp)
                         )
                         val ingredients = drink.ingredientList().orEmpty()
                         if (ingredients.isEmpty()) {
-                            Text("No ingredients", color = colorResource(R.color.white))
+                            Text("No ingredients", color = colorResource(R.color.text_dark))
                         } else {
                             ingredients.forEach { (ing, measure) ->
                                 val line = if (measure.isBlank()) ing else "$measure $ing"
-                                Text(line, color = colorResource(R.color.white))
+                                Text(line, color = colorResource(R.color.text_dark))
                             }
                         }
                     }
                 }
 
-                Card(Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                Card(Modifier.padding(horizontal = 16.dp, vertical = 8.dp).shadow(8.dp, RoundedCornerShape(16.dp))) {
                     Column(
                         Modifier
-                            .background(colorResource(R.color.card_opacity),)
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(
+                                        colorResource(R.color.card_tropical),
+                                        colorResource(R.color.sunset_orange)
+                                    )
+                                )
+                            )
                             .padding(16.dp)
                             .fillMaxWidth()
                     ) {
                         Text(
-                            text = "Recipe",
+                            text = "Recipe:",
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
                             color = colorResource(
-                                R.color.white
-                            )
+                                R.color.section_title
+                            ),
+                            modifier = Modifier.padding(bottom = 8.dp)
                         )
                         Text(
                             drink.strInstructions?.takeIf { !it.isNullOrBlank() }
                                 ?: drink.strInstructions
                                 ?: "No instructions",
-                            color = colorResource(R.color.white)
+                            color = colorResource(R.color.text_dark)
                         )
 
                     }
@@ -282,12 +278,13 @@ fun CategoryView(category: Category)
         Brush.horizontalGradient(
             Category.colors((category))
         )
+
     ).padding(vertical = 10.dp, horizontal = 20.dp))
     {
         Text(
             text = Category.toString(category),
             fontSize = 18.sp,
-            color = colorResource(R.color.white),
+            color = colorResource(R.color.text_dark),
         )
     }
 }

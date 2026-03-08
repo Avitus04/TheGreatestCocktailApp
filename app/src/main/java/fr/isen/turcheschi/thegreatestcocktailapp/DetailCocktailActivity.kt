@@ -17,12 +17,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -50,7 +52,12 @@ class DetailCocktailActivity : ComponentActivity() {
                             title = { Text(text = appBarState.title) },
                             actions = {
                                 appBarState.actions?.invoke(this)
-                            }
+                            },
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = colorResource(R.color.sunset_orange),
+                                titleContentColor = colorResource(R.color.text_dark),
+                                actionIconContentColor = colorResource(R.color.grey_200)
+                            )
                         )
                     },
                 ) { innerPadding ->
